@@ -1,7 +1,10 @@
+import Aplication from "./Aplication";
+
 function App() {
   return (
     <>
-      <h1>React Homework Template (Vite)</h1>
+      
+      <Aplication />
     </>
   );
 }
