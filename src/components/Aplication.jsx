@@ -28,6 +28,16 @@ export default class Aplication extends Component {
     }));
   };
 
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
+    return total === 0 ? 0 : Math.round((good / total) * 100);
+  };
   static propTypes = {
     step: PropTypes.number,
   };
@@ -51,9 +61,13 @@ export default class Aplication extends Component {
             Bad
           </button>
           <h2>Statistics</h2>
-          <p>Good:{good}</p>
-          <p>Neutral:{neutral}</p>
-          <p>Bad:{bad}</p>
+          <ul>
+            <li>Good:{good}</li>
+            <li>Neutral:{neutral}</li>
+            <li>Bad:{bad}</li>
+            <li>Total: {this.countTotalFeedback()}</li>
+            <li>Positive Feedback:{this.countPositiveFeedbackPercentage()}%</li>
+          </ul>
         </div>
       </>
     );
