@@ -12,8 +12,6 @@ export default class Aplication extends Component {
     bad: 0,
   };
 
-  
-
   handleIncrementGood = () => {
     this.setState((state, props) => ({
       good: state.good + props.step,
@@ -35,8 +33,7 @@ export default class Aplication extends Component {
   };
 
   render() {
-    const { step } = this.props;
-
+    const { good, neutral, bad } = this.state;
     return (
       <>
         <div>
@@ -44,16 +41,19 @@ export default class Aplication extends Component {
           <button type="button" onClick={this.handleIncrementGood}>
             Good
           </button>
-                <button style={{ margin: "10px" }} type="button" onClick={this.handleIncrementNeutral}>
+          <button
+            style={{ margin: "10px" }}
+            type="button"
+            onClick={this.handleIncrementNeutral}>
             Neutral
           </button>
           <button type="button" onClick={this.handleIncrementBad}>
             Bad
           </button>
           <h2>Statistics</h2>
-          <p>Good:{this.state.good}</p>
-          <p>Neutral:{this.state.neutral}</p>
-          <p>Bad:{this.state.bad}</p>
+          <p>Good:{good}</p>
+          <p>Neutral:{neutral}</p>
+          <p>Bad:{bad}</p>
         </div>
       </>
     );
