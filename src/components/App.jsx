@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import Statistics from "./Statistics";
 import Section from "./Section";
-// import FeedbackOptions from "./FeedbackOptions";
+import FeedbackOptions from "./FeedbackOptions";
 
 export default class App extends Component {
   static defaultProps = {
@@ -14,26 +14,11 @@ export default class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  handleLeaveFeedback = (type) => {
-  console.log(type);
+  handleLeaveFeedback = (e) => {
+    const { name } = e.currentTarget;
+
     this.setState((prevState, props) => ({
-      [type]: prevState[type] + props.step,
-      
-    }));
-  };
-  handleIncrementGood = () => {
-    this.setState((state, props) => ({
-      good: state.good + props.step,
-    }));
-  };
-  handleIncrementNeutral = () => {
-    this.setState((state, props) => ({
-      neutral: state.neutral + props.step,
-    }));
-  };
-  handleIncrementBad = () => {
-    this.setState((state, props) => ({
-      bad: state.bad + props.step,
+      [name.toLowerCase()]: prevState[name.toLowerCase()] + props.step,
     }));
   };
 
@@ -55,23 +40,13 @@ export default class App extends Component {
 
     return (
       <div>
-
         <Section title="Please leave feedback">
           {/* <FeedbackOptions options={["good", "neutral", "bad", ]} onLeaveFeedback={this.handleLeaveFeedback}></FeedbackOptions> */}
         </Section>
-        
-        <button type="button" onClick={this.handleIncrementGood}>
-          Good
-        </button>
-        <button
-          style={{ margin: "10px" }}
-          type="button"
-          onClick={this.handleIncrementNeutral}>
-          Neutral
-        </button>
-        <button type="button" onClick={this.handleIncrementBad}>
-          Bad
-        </button>
+        <FeedbackOptions
+          options={["good", "neutral", "bad"]}
+          onLeaveFeedback={this.handleLeaveFeedback}></FeedbackOptions>
+
         <Section title="Statistics">
           {total === 0 ? (
             <p>There is no feedback</p>
